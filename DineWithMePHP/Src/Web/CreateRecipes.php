@@ -18,6 +18,15 @@
 <a href="index.php?action=viewrecipes">View recipes</a>
 <a href="index.php?action=viewevents">View events</a>
 
+<h2>Create</h2>
+
+<form role="form" method="POST" action="index.php?action=addRecipe">
+    <fieldset>
+        <label>Name <input type="text" name="name" id="name"></label>
+        <label>People <input type="text" id="people" name="people"></label>
+        <input type="submit" value="add">
+    </fieldset>
+</form>
 
 </body>
 </html>

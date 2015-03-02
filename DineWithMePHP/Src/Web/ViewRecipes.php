@@ -12,19 +12,7 @@
 
 <h1> View recipes </h1>
 
-<?php
 
-require_once "Src/core/DWMFacade.php";
-
-$facade = new DWMFacade();
-
-foreach($facade->getRecipes() as $recipe){
-    echo $recipe."\n";
-}
-
-
-
-?>
 
 <h2>What would you like to do?</h2>
 <a href="index.php?action=createevents">Create event</a>
@@ -32,6 +20,16 @@ foreach($facade->getRecipes() as $recipe){
 <a href="index.php?action=viewrecipes">View recipes</a>
 <a href="index.php?action=viewevents">View events</a>
 
+<h2>Recipes</h2>
 
+<table border="1">
+<?php foreach($this->recipes as $recipe) {?>
+<tr>
+    <td><?php echo $recipe->getName() ?></td> <td> <?php echo $recipe->getPeople() ?></td>
+</tr>
+<?php }
+?>
+
+</table>
 </body>
 </html>

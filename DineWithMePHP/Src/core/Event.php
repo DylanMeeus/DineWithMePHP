@@ -11,7 +11,23 @@ class Event
     public $recipe;
     public $host;
 
-    public function __construct(){}
+    public function __construct($_recipe, $_host){
+        $this->recipe = $_recipe;
+        $this->host = $_host;
+    }
+
+    public function getRecipe()
+    {
+        return $this->recipe;
+    }
+
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+
+
 
 }
 ?>

@@ -13,20 +13,22 @@ class Recipe
     public $instructions;
     public $ingredients;
 
-    /*
+
     public function __construct($_name, $_people, $_instructions, $_ingredients)
     {
-        $this->$name=$_name;
+        $this->name=$_name;
+        $this->people = $_people;
+        $this->instructions = $_instructions;
+        $this->ingredients = $_ingredients;
+    }
 
-        $this->$people = $_people;
-        $this->$instructions = $_instructions;
-        $this->$ingredients = $_ingredients;
+    public function getName()
+    {
+        return $this->name;
+    }
 
-
-    } */
-
-    public function __construct(){
-
+    public function getPeople(){
+        return $this->people;
     }
 
     public function setName($_name){
@@ -38,11 +40,11 @@ class Recipe
     }
 
     public function setInstructions($_instructions){
-        $this->$instructions = $_instructions;
+        $this->instructions = $_instructions;
     }
 
     public function setIngredients($_ingredients){
-        $this->$ingredients = $_ingredients;
+        $this->ingredients = $_ingredients;
     }
 }
 ?>
