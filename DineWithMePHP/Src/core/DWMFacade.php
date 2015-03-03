@@ -16,7 +16,7 @@ class DWMFacade
     public $db;
     static $instance=null;
 
-    protected function __construct()
+    public function __construct()
     {
         $dbFactory = new DBFactory();
         $this->db = $dbFactory->getDB(false);

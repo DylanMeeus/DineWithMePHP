@@ -8,16 +8,26 @@
  */
 require_once "Src/core/Recipe.php";
 require_once "Src/core/DWMFacade.php";
+
 class Servlet
 {
 
     private $facade;
     private $recipes;
+    private $events;
     //static $servlet = null;
 
     public function __construct()
     {
-        $this->facade = DWMFacade::getInstance();
+        session_start();
+        if (isset($_SESSION['facade']))
+        {
+            $this->facade = $_SESSION['facade'];
+        } else
+        {
+            $this->facade = new DWMFacade();
+            $_SESSION['facade'] = $this->facade;
+        }
     }
 
     public function processRequest()
@@ -34,37 +44,37 @@ class Servlet
         if ($action == "home")
         {
             $nextPage = "home.php";
-        }
-        elseif ($action == "viewrecipes")
+        } elseif ($action == "viewrecipes")
         {
             $this->recipes = $this->facade->getRecipes();
             $nextPage = "ViewRecipes.php";
-        }
-        elseif ($action == "viewevents")
+        } elseif ($action == "viewevents")
         {
+            $this->events = $this->facade->getEvents();
             $nextPage = "ViewEvents.php";
-        }
-        elseif ($action == "createrecipes")
+        } elseif ($action == "createrecipes")
         {
             $nextPage = "CreateRecipes.php";
-        }
-        elseif ($action == "createevents")
+        } elseif ($action == "createevents")
         {
             $nextPage = "CreateEvents.php";
-        }
-        elseif($action=="addRecipe")
+        } elseif ($action == "addRecipe")
         {
             $name = $_POST['name'];
             $people = $_POST['people'];
-            $instructions="";
-            $ingredients="";
+            $instructions = "";
+            $ingredients = "";
 
-            $newRecipe = new Recipe($name,$people,$instructions,$ingredients);
+            $newRecipe = new Recipe($name, $people, $instructions, $ingredients);
             $this->facade->addRecipe($newRecipe);
             // Update the recipe list
             //$this->recipes = $this->facade->getRecipes();
-            $nextPage="ViewRecipes.php";
+            $nextPage = "ViewRecipes.php";
             $this->recipes = $this->facade->getRecipes();
+        }
+        elseif($action=='addEvent')
+        {
+            $host = $_POST['host'];
         }
         require_once('Src/Web/' . $nextPage);
     }

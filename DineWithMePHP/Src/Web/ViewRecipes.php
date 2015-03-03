@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>DWMPHP</title>
+    <script src="Src/js/forms.js"></script>
 </head>
-
 <body>
 
 <h1> View recipes </h1>
@@ -29,7 +29,10 @@
 </tr>
 <?php }
 ?>
+    <!-- let's try to fancy this up a bit -->
+
 
 </table>
+<input type="button" value="+" onclick="showRecipeAddForm()" id="addbutton">
 </body>
 </html>
