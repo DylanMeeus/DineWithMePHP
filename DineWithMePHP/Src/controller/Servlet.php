@@ -79,6 +79,7 @@ class Servlet
             $recipename = $_POST['selectedRecipe'];
             $recipe = $this->facade->getRecipeByName($recipename);
             $newEvent = new Event($recipe,$host);
+            // test
             $this->facade->addEvent($newEvent);
             $this->events = $this->facade->getEvents();
             $nextPage = "ViewEvents.php";

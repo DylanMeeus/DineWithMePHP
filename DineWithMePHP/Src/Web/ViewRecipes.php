@@ -20,8 +20,7 @@
 <h2>Recipes</h2>
 
 <table border="1">
-    <?php foreach ($this->recipes as $recipe)
-    { ?>
+    <?php foreach ($this->recipes as $recipe) { ?>
         <tr>
             <td><?php echo $recipe->getName() ?></td>
             <td> <?php echo $recipe->getPeople() ?></td>
