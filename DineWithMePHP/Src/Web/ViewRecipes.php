@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html>
@@ -13,7 +11,6 @@
 <h1> View recipes </h1>
 
 
-
 <h2>What would you like to do?</h2>
 <a href="index.php?action=createevents">Create event</a>
 <a href="index.php?action=createrecipes">Create Recipes</a>
@@ -23,12 +20,14 @@
 <h2>Recipes</h2>
 
 <table border="1">
-<?php foreach($this->recipes as $recipe) {?>
-<tr>
-    <td><?php echo $recipe->getName() ?></td> <td> <?php echo $recipe->getPeople() ?></td>
-</tr>
-<?php }
-?>
+    <?php foreach ($this->recipes as $recipe)
+    { ?>
+        <tr>
+            <td><?php echo $recipe->getName() ?></td>
+            <td> <?php echo $recipe->getPeople() ?></td>
+        </tr>
+    <?php }
+    ?>
     <!-- let's try to fancy this up a bit -->
 
 

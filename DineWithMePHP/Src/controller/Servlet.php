@@ -8,7 +8,7 @@
  */
 require_once "Src/core/Recipe.php";
 require_once "Src/core/DWMFacade.php";
-
+require_once "Src/core/Event.php";
 class Servlet
 {
 
@@ -50,6 +50,7 @@ class Servlet
             $nextPage = "ViewRecipes.php";
         } elseif ($action == "viewevents")
         {
+            $this->recipes = $this->facade->getRecipes();
             $this->events = $this->facade->getEvents();
             $nextPage = "ViewEvents.php";
         } elseif ($action == "createrecipes")
@@ -75,6 +76,12 @@ class Servlet
         elseif($action=='addEvent')
         {
             $host = $_POST['host'];
+            $recipename = $_POST['selectedRecipe'];
+            $recipe = $this->facade->getRecipeByName($recipename);
+            $newEvent = new Event($recipe,$host);
+            $this->facade->addEvent($newEvent);
+            $this->events = $this->facade->getEvents();
+            $nextPage = "ViewEvents.php";
         }
         require_once('Src/Web/' . $nextPage);
     }

@@ -40,7 +40,7 @@ class InMemoryDB implements IDatabase
         array_push($this->recipes, $recipe);
     }
 
-    public function addEvent($event, $recipe)
+    public function addEvent($event)
     {
         array_push($this->events, $event);
     }
@@ -53,6 +53,17 @@ class InMemoryDB implements IDatabase
     public function getEvents()
     {
         return $this->events;
+    }
+
+    public function getRecipeByName($recipeName)
+    {
+        foreach($this->recipes as $recipe)
+        {
+            if($recipe->getName()==$recipeName){
+                return $recipe;
+            }
+        }
+        return null;
     }
 }
 

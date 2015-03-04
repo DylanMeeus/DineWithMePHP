@@ -44,7 +44,15 @@ class DWMFacade
     public function addRecipe($newRecipe)
     {
         $this->db->addRecipe($newRecipe);
+    }
 
+    public function addEvent($newEvent){
+        $this->db->addEvent($newEvent);
+    }
+
+    public function getRecipeByName($recipeName)
+    {
+        return $this->db->getRecipeByName($recipeName);
     }
 
 }

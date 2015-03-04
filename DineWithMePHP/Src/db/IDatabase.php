@@ -14,7 +14,7 @@ interface IDatabase
 
     public function addRecipe($recipe);
 
-    public function addEvent($recipe,$host);
+    public function addEvent($recipe);
 }
 
 ?>

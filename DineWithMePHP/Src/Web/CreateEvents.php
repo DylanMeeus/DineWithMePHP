@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html>
@@ -17,7 +15,6 @@
 <a href="index.php?action=createrecipes">Create Recipes</a>
 <a href="index.php?action=viewrecipes">View recipes</a>
 <a href="index.php?action=viewevents">View events</a>
-
 
 
 </body>
