@@ -14,21 +14,12 @@ class DWMFacade
 {
 
     public $db;
-    static $instance=null;
+    static $instance = null;
 
-    public function __construct()
+    public function __construct($dbConfig)
     {
         $dbFactory = new DBFactory();
-        $this->db = $dbFactory->getDB(false);
-    }
-
-    public static function getInstance()
-    {
-        if(DWMFacade::$instance === null)
-        {
-            $instance = new DWMFacade();
-        }
-        return $instance;
+        $this->db = $dbFactory->getDB($dbConfig);
     }
 
     public function getRecipes()
@@ -46,7 +37,8 @@ class DWMFacade
         $this->db->addRecipe($newRecipe);
     }
 
-    public function addEvent($newEvent){
+    public function addEvent($newEvent)
+    {
         $this->db->addEvent($newEvent);
     }
 
@@ -56,4 +48,5 @@ class DWMFacade
     }
 
 }
+
 ?>

@@ -10,8 +10,10 @@ class Event
 {
     public $recipe;
     public $host;
+    public $eventID;
 
-    public function __construct($_recipe, $_host){
+    public function __construct($_recipe, $_host)
+    {
         $this->recipe = $_recipe;
         $this->host = $_host;
     }
@@ -26,8 +28,12 @@ class Event
         return $this->host;
     }
 
-
+    public function setID($id)
+    {
+        $this->eventID = $id;
+    }
 
 
 }
+
 ?>

@@ -7,18 +7,20 @@
  */
 
 require_once "Src/db/InMemoryDB.php";
+require_once "Src/db/PSQLDB.php";
+class DBFactory
+{
 
-class DBFactory {
-
-    public function getDB($_hasRDBMS)
+    public function getDB($dbConfig)
     {
-        if($_hasRDBMS)
-        {
-            // return online db;
-        }
-        else
+        $dbType = $dbConfig['dbType'];
+        if ($dbType=='memory')
         {
             return new InMemoryDB();
+
+        } else
+        {
+            return new PSQLDB($dbConfig);
         }
         return null;
     }

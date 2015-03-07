@@ -10,16 +10,12 @@ class Recipe
 {
     public $name;
     public $people;
-    public $instructions;
-    public $ingredients;
+    public $recipeID;
 
-
-    public function __construct($_name, $_people, $_instructions, $_ingredients)
+    public function __construct($_name, $_people)
     {
-        $this->name=$_name;
+        $this->name = $_name;
         $this->people = $_people;
-        $this->instructions = $_instructions;
-        $this->ingredients = $_ingredients;
     }
 
     public function getName()
@@ -27,24 +23,25 @@ class Recipe
         return $this->name;
     }
 
-    public function getPeople(){
+    public function getPeople()
+    {
         return $this->people;
     }
 
-    public function setName($_name){
+    public function setName($_name)
+    {
         $this->$name = $_name;
     }
 
-    public function setPeople($_people){
+    public function setPeople($_people)
+    {
         $this->$people = $_people;
     }
 
-    public function setInstructions($_instructions){
-        $this->instructions = $_instructions;
-    }
-
-    public function setIngredients($_ingredients){
-        $this->ingredients = $_ingredients;
+    public function setID($id)
+    {
+        $this->recipeID = $id;
     }
 }
+
 ?>

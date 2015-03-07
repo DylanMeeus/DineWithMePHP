@@ -23,9 +23,10 @@ class InMemoryDB implements IDatabase
     public function __construct()
     {
         // add some dummy recipes
-        $recipeOne = new Recipe("Chicken", 4, "Hello", "World");
-        $recipeTwo = new Recipe("Noodle soup", 4, "noodles", "add water");
-        array_push($this->recipes, $recipeOne, $recipeTwo);
+        $recipeOne = new Recipe("Chicken", 4);
+        $recipeTwo = new Recipe("Noodle soup", 4);
+        addRecipe($recipeOne);
+        addRecipe($recipeTwo);
 
         // dummy events
         $eventOne = new Event($recipeOne, "Dylan");
@@ -37,17 +38,22 @@ class InMemoryDB implements IDatabase
 
     public function addRecipe($recipe)
     {
-        array_push($this->recipes, $recipe);
+        $recipeID = count($this->recipes);
+        $recipe->setID($recipeID);
+        $this->recipes[$recipeID] = $recipe;
     }
 
     public function addEvent($event)
     {
-        array_push($this->events, $event);
+        $eventID = count($this->events);
+        $event->setID($eventID);
+        $this->events[$eventID] = $event;
     }
 
     public function getRecipes()
     {
-        return $this->recipes;
+        return array_values($this->recipes);
+        //return $this->recipes;
     }
 
     public function getEvents()
@@ -57,9 +63,10 @@ class InMemoryDB implements IDatabase
 
     public function getRecipeByName($recipeName)
     {
-        foreach($this->recipes as $recipe)
+        foreach ($this->recipes as $recipe)
         {
-            if($recipe->getName()==$recipeName){
+            if ($recipe->getName() == $recipeName)
+            {
                 return $recipe;
             }
         }
