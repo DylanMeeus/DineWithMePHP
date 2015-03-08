@@ -47,6 +47,16 @@ class DWMFacade
         return $this->db->getRecipeByName($recipeName);
     }
 
+    public function deleteRecipe($id)
+    {
+        $this->db->deleteRecipe($id);
+    }
+
+    public function deleteEvent($id)
+    {
+        $this->db->deleteEvent($id);
+    }
+
 }
 
 ?>

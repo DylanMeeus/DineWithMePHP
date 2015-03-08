@@ -23,23 +23,40 @@ class PSQLDB implements IDatabase
         {
             $connString .= $key . '=' . $value . ';';
         }
-        echo $connString;
-    //    try
-  //      {
-           // $this->DB = new PDO($connString, $dbConfig['username'], $dbConfig['password']);
-            echo "test";
-            $this->DB = new PDO($connString, 'r0368004','Proton16021');
+        try
+        {
+            // $this->DB = new PDO($connString, $dbConfig['username'], $dbConfig['password']);
+
+            $this->DB = new PDO($connString, $dbConfig['username'], $dbConfig['password']);
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    /*    } catch (Exception $ex)
+        } catch (Exception $ex)
         {
             error_log($connString);
         }
-*/
+
     }
 
     public function getEvents()
     {
-        // TODO: Implement getEvents() method.
+        $query = "select * from recipes inner join events on recipes.recipeid = events.recipe";
+        $statement = null;
+        $statement = $this->DB->prepare($query);
+        $statement->execute();
+
+        // get result
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll();
+
+        $events = array();
+        foreach ($result as $row)
+        {
+            $recipe = new Recipe($row['recipename'], $row['people']);
+            $recipe->setID($row['recipeid']);
+            $event = new Event($recipe, $row['host']);
+            $event->setID($row['eventid']);
+            array_push($events, $event);
+        }
+        return $events;
     }
 
     public function getRecipes()
@@ -51,7 +68,7 @@ class PSQLDB implements IDatabase
         $statement = $this->DB->prepare($query);
         $statement->execute();
 
-   // get result
+        // get result
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         $result = $statement->fetchAll();
 
@@ -60,7 +77,7 @@ class PSQLDB implements IDatabase
         {
             $recipe = new Recipe($row['recipename'], $row['people']);
             $recipe->setID($row['recipeid']);
-            array_push($recipes,$recipe);
+            array_push($recipes, $recipe);
         }
 
         return $recipes;
@@ -69,11 +86,83 @@ class PSQLDB implements IDatabase
 
     public function addRecipe($recipe)
     {
-        // TODO: Implement addRecipe() method.
+        $query = 'insert into recipes(recipename,people) values(:recipename, :people)';
+        $statement = null;
+        $statement = $this->DB->prepare($query);
+
+        $args = array(
+            ':recipename' => $recipe->getName(),
+            ':people' => $recipe->getPeople()
+        );
+        $statement->execute($args);
+
     }
 
-    public function addEvent($recipe)
+    public function addEvent($event)
     {
-        // TODO: Implement addEvent() method.
+        $query = 'insert into events(host,recipe) values(:host, :recipe)';
+        $statement = null;
+        $statement = $this->DB->prepare($query);
+
+        $args = array(
+            ':host' => $event->getHost(),
+            ':recipe' => $event->getRecipe()->getID()
+        );
+
+        $statement->execute($args);
     }
+
+    public function getRecipeByName($recipeName)
+    {
+
+        // fetch all recipes and store in recipes;
+        $query = "SELECT * FROM RECIPES";
+        $statement = null;
+        $statement = $this->DB->prepare($query);
+        $statement->execute();
+
+        // get result
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll();
+
+        $recipes = array();
+        foreach ($result as $row)
+        {
+            $recipe = new Recipe($row['recipename'], $row['people']);
+            $recipe->setID($row['recipeid']);
+            array_push($recipes, $recipe);
+        }
+
+
+        foreach ($recipes as $recipe)
+        {
+            if ($recipe->getName() == $recipeName)
+            {
+                return $recipe;
+            }
+        }
+        return null;
+    }
+
+    public function deleteRecipe($id)
+    {
+        $query = "delete from events where recipe = " . $id;
+        $statement = null;
+        $statement = $this->DB->prepare($query);
+        $statement->execute();
+
+        $query = "delete from recipes where recipeid = " . $id;
+        $statement = null;
+        $statement = $this->DB->prepare($query);
+        $statement->execute();
+    }
+
+    public function deleteEvent($eventID)
+    {
+        $query = "delete from events where recipe = " . $eventID;
+        $statement = null;
+        $statement = $this->DB->prepare($query);
+        $statement->execute();
+    }
+
 }

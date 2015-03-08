@@ -42,6 +42,11 @@ class Recipe
     {
         $this->recipeID = $id;
     }
+
+    public function getID()
+    {
+        return $this->recipeID;
+    }
 }
 
 ?>

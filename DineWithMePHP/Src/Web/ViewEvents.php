@@ -64,6 +64,7 @@
         <tr>
         <td> <?php echo $event->getHost() ?> </td>
         <td><?php echo $event->getRecipe()->getName() ?></td>
+        <td><?php echo '<a href="index.php?action=deleteEvent&id=' . $event->getID() . '"> delete </a>'?></td>
         </tr><?php
     } ?>
 </table>

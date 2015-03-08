@@ -72,6 +72,10 @@ class InMemoryDB implements IDatabase
         }
         return null;
     }
+
+    public function deleteRecipe($id){}
+    public function deleteEvent($eventID){}
+
 }
 
 ?>

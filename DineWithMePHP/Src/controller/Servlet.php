@@ -27,7 +27,7 @@ class Servlet
             $this->facade = $_SESSION['facade'];
         } else
         {*/
-            $this->facade = new DWMFacade($dbConfig);
+        $this->facade = new DWMFacade($dbConfig);
         //    $_SESSION['facade'] = $this->facade;
         //}
     }
@@ -74,6 +74,18 @@ class Servlet
             // test
             $this->facade->addEvent($newEvent);
             $this->events = $this->facade->getEvents();
+            $nextPage = "ViewEvents.php";
+        } elseif ($action == 'deleteRecipe')
+        {
+            $this->facade->deleteRecipe($_GET['id']);
+            $this->recipes = $this->facade->getRecipes();
+            $nextPage = "ViewRecipes.php";
+        }
+        elseif($action == "deleteEvent")
+        {
+            $this->facade->deleteEvent($_GET['id']);
+            $this->events= $this->facade->getEvents();
+            $this->recipes = $this->facade->getRecipes();
             $nextPage = "ViewEvents.php";
         }
         require_once('Src/Web/' . $nextPage);

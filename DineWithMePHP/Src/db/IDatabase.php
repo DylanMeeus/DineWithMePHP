@@ -14,7 +14,14 @@ interface IDatabase
 
     public function addRecipe($recipe);
 
-    public function addEvent($recipe);
+    public function addEvent($event);
+
+    public function getRecipeByName($recipeName);
+
+    public function deleteRecipe($recipeID);
+
+    public function deleteEvent($eventID);
+
 }
 
 ?>

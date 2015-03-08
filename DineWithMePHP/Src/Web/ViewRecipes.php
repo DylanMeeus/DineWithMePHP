@@ -23,11 +23,11 @@
         <tr>
             <td><?php echo $recipe->getName() ?></td>
             <td> <?php echo $recipe->getPeople() ?></td>
+            <td><?php echo '<a href="index.php?action=deleteRecipe&id=' . $recipe->getID() . '"> delete </a>'?></td>
         </tr>
     <?php }
     ?>
 </form>
-    <!-- let's try to fancy this up a bit -->
 
 
 </table>

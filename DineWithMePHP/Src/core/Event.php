@@ -33,6 +33,11 @@ class Event
         $this->eventID = $id;
     }
 
+    public function getID()
+    {
+        return $this->eventID;
+    }
+
 
 }
 
