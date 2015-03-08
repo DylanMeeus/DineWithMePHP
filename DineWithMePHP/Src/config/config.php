@@ -10,15 +10,15 @@ require_once('../../db_password.php');
 $dbConfig = array(
     'dbType' => 'pdo',
     'driver' => 'pgsql',
-    'username' => $username,
-    'password' => $password,
+    'username' => 'r0368004',
+    'password' => 'Proton16021',
     'properties' => array(
         'host' => 'gegevensbanken.khleuven.be',
         'dbname' => 'probeer',
-        'port' => 51415,
+        'port' => '51415',
     )
 );
 
-?>
+
 
 

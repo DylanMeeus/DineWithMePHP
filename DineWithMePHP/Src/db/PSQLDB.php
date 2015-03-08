@@ -23,15 +23,18 @@ class PSQLDB implements IDatabase
         {
             $connString .= $key . '=' . $value . ';';
         }
-        try
-        {
-            $this->DB = new PDO($connString, $dbConfig['username'], $dbConfig['password']);
+        echo $connString;
+    //    try
+  //      {
+           // $this->DB = new PDO($connString, $dbConfig['username'], $dbConfig['password']);
+            echo "test";
+            $this->DB = new PDO($connString, 'r0368004','Proton16021');
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (Exception $ex)
+    /*    } catch (Exception $ex)
         {
-            error_log($ex->getMessage());
+            error_log($connString);
         }
-
+*/
     }
 
     public function getEvents()
@@ -43,7 +46,6 @@ class PSQLDB implements IDatabase
     {
 
         //end test
-
         $query = "SELECT * FROM RECIPES";
         $statement = null;
         $statement = $this->DB->prepare($query);

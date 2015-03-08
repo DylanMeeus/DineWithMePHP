@@ -21,15 +21,15 @@ class Servlet
 
     public function __construct($dbConfig)
     {
-        session_start();
+        /*session_start();
         if (isset($_SESSION['facade']))
         {
             $this->facade = $_SESSION['facade'];
         } else
-        {
+        {*/
             $this->facade = new DWMFacade($dbConfig);
-            $_SESSION['facade'] = $this->facade;
-        }
+        //    $_SESSION['facade'] = $this->facade;
+        //}
     }
 
     public function processRequest()
